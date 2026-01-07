@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+  <body>
+    <nav>
+      <a href="{% url 'home' %}">← Back to Week</a> |
+      <p>
+  <a href="{% url 'week_view' %}">← Back to Week</a> |
+  <a href="{% url 'add_look_item' plan.id %}">+ Add Item (image/notes)</a>
+</p>
+
+    <hr>
+    <h1>{{ plan.title }}</h1>
+    <p><strong>Date:</strong> {{ plan.date }}</p>
+    <p>
+      {% if plan.mood %}<strong>Mood:</strong> {{ plan.mood }}{% endif %}
+      {% if plan.occasion %} | <strong>Occasion:</strong> {{ plan.occasion }}{% endif %}
+    </p>
+    <h2>Items (Clothes, Hair, Makeup, Shoes, Accessories)</h2>
+    {% if grouped %}
+      {% for category, items in grouped.items %}
+        <h3>{{ category|title }}</h3>
+        <ul>
+          {% for item in items %}
+            <li>
+              {% if item.image %}
+                <img src="{{ item.image.url }}" alt="look image" width="150">
+              {% endif %}
+              {% if item.notes %}<p>{{ item.notes }}</p>{% endif %}
+              {% if item.where_to_buy %}<p><strong>Where to buy:</strong> {{ item.where_to_buy }}</p>{% endif %}
+              {% if item.product_link %}<p><a href="{{ item.product_link }}">Product link</a></p>{% endif %}
+            </li>
+          {% endfor %}
+        </ul>
+      {% endfor %}
+    {% else %}
+      <p>No items added yet. Click “Add Item”.</p>
+    {% endif %}
+  </body>
+</html>

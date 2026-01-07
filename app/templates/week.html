@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+  <body>
+    <nav>
+
+    <a href="{% url 'home' %}">Home</a> |
+    <a href="{% url 'week_view' %}">This Week</a> |
+    <a href="{% url 'public_feed' %}">Public Feed</a> |
+    </nav>
+
+    <hr>
+    
+    <h1> Week of {{monday}}</h1>
+    <p>
+      <a href="{% url 'week_view' %}?start={{ prev_start }}">◀ Prev Week</a> |
+      <a href="{% url 'week_view' %}">This Week</a> |
+      <a href="{% url 'week_view' %}?start={{ next_start }}">Next Week ▶</a>
+    </p>
+
+     <ul>
+        {% for row in rows %}
+
+        <li>
+          <strong>{{ row.date|date:"l, M j" }}</strong>
+          {% if row.plan %}
+            — {{ row.plan.title }}
+
+            <a href="{% url 'outfit_detail' row.plan.id %}">View</a>
+            <a href="{% url 'edit_outfit_plan' row.plan.id %}">Edit</a>
+            <a href="{% url 'delete_outfit_plan' row.plan.id %}">Delete</a>
+
+            {% else %}
+            — No plan yet
+            <a href="{% url 'create_outfit_plan' %}">Create</a>
+          {% endif %}
+        </li>
+      {% endfor %}
+    </ul>
+
+    <p><a href= "{% url 'home' %}">Back</a></p>
+    </body>
+</html>
+
+
+
+
+

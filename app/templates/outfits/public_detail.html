@@ -1,0 +1,12 @@
+<!DOCTYPE html>
+<html>
+  <body>
+    <h1>{{ plan.title }}</h1>
+    <p><strong>By:</strong> {{ plan.user.username }}</p>
+    <p><strong>Date:</strong> {{ plan.date }}</p>
+    <p><strong>Mood:</strong> {{ plan.mood }}</p>
+    <p><strong>Occasion:</strong> {{ plan.occasion }}</p>
+
+    <p><a href="{% url 'public_feed' %}">Back to Feed</a></p>
+  </body>
+</html>

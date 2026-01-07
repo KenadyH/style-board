@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Add Item</title>
+  </head>
+  <body>
+    <h1>Add Item</h1>
+
+    <p>Outfit: <strong>{{ plan.title }}</strong> ({{ plan.date }})</p>
+
+    <form method="POST" enctype="multipart/form-data">
+      {% csrf_token %}
+      {{ form.as_p }}
+      <button type="submit">Save Item</button>
+    </form>
+
+    <p><a href="{% url 'outfit_detail' plan.id %}">Back to Outfit</a></p>
+  </body>
+</html>
